@@ -9,6 +9,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet">
 	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
 	<link href="style.css" rel="stylesheet">
 
@@ -32,12 +33,14 @@
 			<div class="flex-shrink-0 flex gap-2 items-center max-lg:w-full max-lg:flex-grow">
 			  <span class="flex items-center lg:hidden mr-4">
 				<button
-				  class="text-white/50"
+				  class="text-white/50 hidden max-lg:block"
 				  type="button"
+				  id="open-menu-btn"
 				>
 				  <span
+				 	 id="open-menu-icon"
 					aria-hidden="true"
-					class="hidden"
+					
 				  >
 					<svg
 					  class="w-8 h-8"
@@ -55,6 +58,7 @@
 					</svg>
 				  </span>
 				  <span
+				  	id="close-menu-icon"
 					aria-hidden="true"
 					class="hidden"
 				  >
@@ -90,7 +94,42 @@
 				</span>
   
 				<div class="gap-8 items-center hidden lg:flex ml-12">
-				  
+					<a
+						href="https://b3.fun/"
+						className="body-text-color font-light drop-shadow-md hover:text-white duration-200"
+						rel="noopener noreferrer"
+						target="_blank"
+						title=""
+					>
+                    About B3
+                 	</a>
+					<a
+						href="https://docs.b3.fun/"
+						className="body-text-color font-light drop-shadow-md hover:text-white duration-200"
+						rel="noopener noreferrer"
+						target="_blank"
+						title=""
+					>
+					Docs
+					</a>
+					<a
+						href="https://sepolia.explorer.b3.fun/"
+						className="body-text-color font-light drop-shadow-md hover:text-white duration-200"
+						rel="noopener noreferrer"
+						target="_blank"
+						title=""
+					>
+                    Explorer
+                 	</a>
+					 <a
+					 href="https://bridge.b3.fun/"
+					 className="body-text-color font-light drop-shadow-md hover:text-white duration-200"
+					 rel="noopener noreferrer"
+					 target="_blank"
+					 title=""
+				 >
+				 Bridge
+				  </a>
 				</div>
 			  </div>
 			</div>
@@ -100,7 +139,42 @@
 		  <nav class="hidden">
 			<div class="p-4 tertiary-bg border border-white/5 mt-4 rounded-lg shadow-xl">
 			  <div class="grid gap-y-7">
-				
+				<a 
+					className="flex items-center p-2 -m-2 text-base font-medium body-text-color transition-all duration-200 rounded-md hover:bg-black/20 focus:outline-none font-pj focus:ring-1 focus:ring-colorFive focus:ring-offset-2"
+					href="https://b3.fun/"
+					rel="noopener noreferrer"
+					target="_blank"
+					title=""
+				>
+					About B3
+				</a>
+				<a 
+					className="flex items-center p-2 -m-2 text-base font-medium body-text-color transition-all duration-200 rounded-md hover:bg-black/20 focus:outline-none font-pj focus:ring-1 focus:ring-colorFive focus:ring-offset-2"
+					href="https://docs.b3.fun/"
+					rel="noopener noreferrer"
+					target="_blank"
+					title=""
+				>
+					Docs
+				</a>
+				<a
+                  className="flex items-center p-2 -m-2 text-base font-medium body-text-color transition-all duration-200 rounded-md hover:bg-black/20 focus:outline-none font-pj focus:ring-1 focus:ring-colorFive focus:ring-offset-2"
+                  href="https://sepolia.explorer.b3.fun/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  title=""
+                >
+                  Explorer
+                </a>
+				<a
+                  className="flex items-center p-2 -m-2 text-base font-medium body-text-color transition-all duration-200 rounded-md hover:bg-black/20 focus:outline-none font-pj focus:ring-1 focus:ring-colorFive focus:ring-offset-2"
+                  href="https://bridge.b3.fun/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  title=""
+                >
+                  Bridge
+                </a>
 			  </div>
 			</div>
 		  </nav>
@@ -115,7 +189,7 @@
 				<div class="fixed-75w-wrapper">
 					<div id="splashScreenLogo" class="tpbl-circle c-white splash-screen-logo"></div>
 					<div id="splashScreenTxt">
-						Loading AWESOME STUFF
+						Loading Faucet Game
 					</div>
 				</div>
 			</div>
@@ -125,12 +199,16 @@
 				<div class="fixed-75w-wrapper">
 					<div class="gm-menu-header-cont">
 						<div class="tpbl-circle c-blue gm-menu-logo-bg"></div>
-						<h1 class="gm-menu-title">Tap Tap Tap</h1>
-						<h2 class="gm-menu-subtitle">Every Tap Matters</h2>
+						<h1 class="gm-menu-title">B3 Testnet Faucet</h1>
+						<h2 class="gm-menu-subtitle">Play to get airdropped test funds</h2>
 					</div>
-					<button id="newGameBtn" class="gm-btn btn-blue" type="button" name="button">New Game</button>
-					<!-- <button id="highScoresBtn" class="gm-btn" type="button" name="button">Best Score</button> -->
-					<button id="aboutBtn" class="gm-btn" type="button" name="button">About</button>
+
+					<p class="gm-menu-subtitle" style="font-size: 70%;">Enter recipient wallet address</p>
+					<input id="address" type="text" name="address" placeholder="Your Wallet Address (0x...)" required 
+					style="width: 100%;padding: 10px 15px;border-radius: 10px;border: 1px solid rgba(255,255,255,0.3);background: rgba(255,255,255,0.2);color: #FFF;margin: 10px 0 20px;" />
+					<button id="newGameBtn" type="submit" class="gm-btn btn-blue">Play for Get Funds</button>
+
+					<button id="aboutBtn" class="small-btn" type="button" name="button" style="background: transparent; font-size: 70%; margin-top: 10px;">Game Credits</button>
 				</div>
 			</div>
 
@@ -138,10 +216,10 @@
 			<div id="pageAbout" class="page-cont page-about page-faded-bg anmtd-grdnt-bg blu-grdnt-bg no-bg">
 				<div class="fixed-75w-wrapper">
 					<div class="info-screen-title-cont">
-						<div class="info-screen-ttl-txt-bld">About</div>
+						<div class="info-screen-ttl-txt-bld">Game Credits</div>
 					</div>
 					<div class="info-screen-txt-cont">
-						<div>Created by</div>
+						<div>Original Game Created by</div>
 						<a href="http://mahdif.com/" class="txt-bold">Mahdi Farra</a>
 						<hr>
 						<div>Credits</div>
@@ -287,6 +365,7 @@
 						<div class="info-screen-body-txt-reg">Score</div>
 						<div id="lvlPssdScore" class="lvl-fnshd-score-nmb">521</div>
 						<div id="lvlPssdBonusScore" class="grow-animation"></div>
+						<div id="lvlPssdFaucetMessage" class="grow-animation" style="font-size: 70%; margin-top: 20px;">+0.01 ETH Earned (Loading...)</div>
 					</div>
 					<div id="lvlPssdContinueNextLvlBtn" class="tpbl-circle c-white submit-circle"></div>
 				</div>
@@ -295,7 +374,15 @@
 		</div>
 	</div>
 
+	<div id="stats" style="display: none;">
+		Distributing to 
+		<span id="statsAddress">0x----</span> 
+		<span id="statsBadge" class="tertiary-bg px-3 py-1 rounded-lg text-sm border border-white/5 shadow"><span id="statsAmount">0.01</span> ETH Issued Today</span>
+	</div>
+
 	<!-- logic & brain -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.8.0/web3.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 	<script src="js/habibiScript.js"></script>
 </body>
 </html>

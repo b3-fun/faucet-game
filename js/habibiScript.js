@@ -1,9 +1,38 @@
 document.addEventListener('DOMContentLoaded', function() {
   // Do after the document fully loaded
+  const menuBtn = document.getElementById('open-menu-btn');
+  const navMenu = document.querySelector('nav');
+
+  menuBtn.addEventListener('click', function() {
+    // Check if the menu is currently open
+    const isOpen = menuBtn.getAttribute('data-open') === 'true';
+
+    if (isOpen) {
+      // Close the menu
+      navMenu.classList.add('hidden');
+      document.getElementById('open-menu-icon').classList.remove('hidden');
+      document.getElementById('close-menu-icon').classList.add('hidden');
+      menuBtn.setAttribute('data-open', 'false');
+    } else {
+      // Open the menu
+      navMenu.classList.remove('hidden');
+      document.getElementById('open-menu-icon').classList.add('hidden');
+      document.getElementById('close-menu-icon').classList.remove('hidden');
+      menuBtn.setAttribute('data-open', 'true');
+    }
+  });
 });
 
+if (typeof web3 !== 'undefined') {
+  web3 = new Web3(web3.currentProvider);
+  console.log('Web3 is loaded');
+}
 
 // ---------------------- Pages ---------------------- //
+
+// Global Variables
+var walletAddress = false;
+var atMaxToday = false;
 
 // Splash Page
 var pageSplash = document.querySelector('#pageSplash');
@@ -444,9 +473,74 @@ var gameEngine = {
     gameEngine.gameLost();
   },
   levelPassed: function() {
-    console.log('Level passed! 💃');
+    console.log('Level passed! 💃', walletAddress, gameEngine);
     audioPool.playSound(levelPassed);
     timeEngine.stop(); // stop the count down
+
+    fetch('https://faucet-api.b3.fun/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            walletAddress
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+
+        var shortAddress = walletAddress.slice(0, 5) + "..." + walletAddress.slice(-5);
+        document.getElementById('lvlPssdFaucetMessage').innerHTML = '+0.01 ETH Earned (<a href="https://sepolia.explorer.b3.fun/address/' + walletAddress + '" target="_blank">View Transaction</a>)';
+
+        // Fetch the stats from the API
+        fetch('https://faucet-api.b3.fun/count?walletAddress=' + walletAddress)
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+
+          var message = "Woot!  We issued 0.01 ETH to " + shortAddress;
+          if(data.count >= 10) {
+            atMaxToday = true;
+            document.getElementById('statsBadge').innerHTML = "Daily Limit Reached: 0.1 ETH";
+            message = "You are at your daily limit for our faucet!  Feel free to keep playing 🤗";
+          }
+          else {
+            document.getElementById('statsAmount').innerHTML = data.count * 0.01;
+          }
+
+          Toastify({
+            text: message,
+            duration: 4000,
+            destination: "https://sepolia.explorer.b3.fun/address/" + walletAddress,
+            newWindow: true,
+            gravity: "bottom", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "linear-gradient(to right, #0034A3, #0028AB)",
+            },
+            onClick: function(){} // Callback after click
+          }).showToast();
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+
+        Toastify({
+          text: error.error ?? "Something went wrong!",
+          duration: 4000,
+          gravity: "bottom", // `top` or `bottom`
+          position: "right", // `left`, `center` or `right`
+          style: {
+            background: "linear-gradient(to right, #c40118, #6b0713)",
+          },
+          onClick: function(){} // Callback after click
+        }).showToast();
+    });
 
     // update level passed page info
     lvlPssdTtl.innerHTML = "Level " + gameEngine.levelNum;
@@ -518,7 +612,6 @@ levelsEngine = {
     levelsEngine.addNewLevel(1, 7, 3, 5, 1, 4);
   }
 }
-
 
 // -------------------------------------------- //
 // ---------------- Audio Pool --------------- //
@@ -667,6 +760,41 @@ abtPageBackBtn.addEventListener('click', function() {
 // Game Menu Buttons
 // -- New Game Button
 newGameBtn.addEventListener('click', function() {
+  // Get the address from #address input
+  try {
+    walletAddress = Web3.utils.toChecksumAddress(document.getElementById('address').value.trim());
+
+    // Show stats
+    console.log(walletAddress);
+    const shortAddress = walletAddress.slice(0, 5) + "..." + walletAddress.slice(-5);
+    document.getElementById('statsAddress').innerHTML = "<a href='https://sepolia.explorer.b3.fun/address/" + walletAddress + "' target='_blank'>" + shortAddress + "</a>";
+
+    // Fetch the stats from the API
+    fetch('https://faucet-api.b3.fun/count?walletAddress=' + walletAddress)
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+
+      if(data.count >= 10) {
+        atMaxToday = true;
+        document.getElementById('statsBadge').innerHTML = "Daily Limit Reached: 0.1 ETH";
+      }
+      else {
+        document.getElementById('statsAmount').innerHTML = data.count * 0.01;
+      }
+      document.getElementById('stats').style.display = 'block';
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  } catch(e) { 
+    console.error('invalid ethereum address', e.message);
+    console.log('Invalid address');
+    alert('You entered an invalid wallet address! Please try again.');
+    return;
+  }
+
+  // is a valid address
   audioPool.playSound(buttonTap);
   toolsBox.showPage(pageTutorial);
   toolsBox.hidePage(pageGameMenu);

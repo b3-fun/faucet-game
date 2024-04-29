@@ -42,13 +42,14 @@ body, h1,h2,h3, p, menu, button{
 
 .main-wrapper {
   font-size: 62.5%; /* reseting base font-size to 10px */
-  border: 1px solid rgb(22 50 92);
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: 10px;
   overflow: hidden;
 }
 
 header {
   letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 a {
@@ -100,6 +101,20 @@ hr {
   color: rgba(255, 255, 255, 0.6);
 }
 
+#stats {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding: 0 10px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#statsBadge {
+  margin: 0 5px;
+}
 
 .txt-bold {
   font-weight: 600;
@@ -241,9 +256,9 @@ hr {
   top: 0;
   left: 0;
   z-index: -1;
-  background-image: -webkit-linear-gradient(#0B1D31 0%, rgba(11,29,49,0.5) 50%);
-  background-image: -o-linear-gradient(#0B1D31 0%, rgba(11,29,49,0.5) 50%);
-  background-image: linear-gradient(#0B1D31 0%, rgba(11,29,49,0.5) 50%);
+  background-image: -webkit-linear-gradient(#0034a3a3 0%, #071c62c2 50%);
+  background-image: -o-linear-gradient(#0034a3a3 0%, #071c62c2 50%);
+  background-image: linear-gradient(#0034a3a3 0%, #071c62c2 50%);
 }
 
 .game-stats-cont {
@@ -406,7 +421,7 @@ hr {
 /*  -------- Game menu page -------- */
 
 .page-game-menu {
-  background: url('images/backgroundPattern.svg') repeat #0034A3;
+  background: url('images/backgroundPattern.svg') repeat #17203d;
 }
 
 .gm-menu-header-cont {
@@ -439,14 +454,13 @@ hr {
 .gm-menu-subtitle {
   font-size: 1em;
   font-weight: 400;
-  color: #58D1FF;
+  color: rgba(255,255,255,0.7);
 }
 
 .gm-btn {
   display: block;
   width: 100%;
-  background: none;
-  border: none;
+  background: #161616;
   font-size: 1em;
   color: white;
   padding: 0.8em 0;
@@ -827,9 +841,23 @@ hr {
     height: 100vh;
     max-height: 100vh;
     border: none;
+    border-radius: 0;
   }
   .admin-cp {
     display: none;
+  }
+
+  .gm-menu-title {
+    font-size: 1.2em;
+  }
+
+  .gm-menu-subtitle {
+    font-size: 0.8em;
+  }
+
+  #statsBadge {
+    display: block;
+    margin: 0 50px;
   }
 }
 
