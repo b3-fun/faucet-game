@@ -790,7 +790,18 @@ newGameBtn.addEventListener('click', function() {
   } catch(e) { 
     console.error('invalid ethereum address', e.message);
     console.log('Invalid address');
-    alert('You entered an invalid wallet address! Please try again.');
+
+    Toastify({
+      text: "Invalid B3 EVM address!",
+      duration: 4000,
+      gravity: "bottom", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      style: {
+        background: "linear-gradient(to right, #c40118, #6b0713)",
+      },
+      onClick: function(){} // Callback after click
+    }).showToast();
+
     return;
   }
 
