@@ -20,7 +20,7 @@
 	<!-- OG Details -->
 	<meta property="og:title" content="B3 Sepolia (Testnet) Faucet" />
 	<meta property="og:description" content="Get B3 Testnet Funds by playing our Faucet Game" />
-	<meta property="og:site_name" content="TapTapTap - Get B3 Testnet Funds by playing our Faucet Game" />
+	<meta property="og:site_name" content="B3 Faucet - Get B3 Testnet Funds by playing our Faucet Game" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://faucet.b3.fun" />
 	<meta property="og:image" content="https://cdn.b3.fun/b3-logo-temp.png" />
@@ -203,9 +203,14 @@
 						<h2 class="gm-menu-subtitle">Play to receive testnet funds</h2>
 					</div>
 
-					<p class="gm-menu-subtitle" style="font-size: 70%;">Enter recipient wallet address</p>
-					<input id="address" type="text" name="address" placeholder="Your Wallet Address (0x...)" required 
+					<p class="gm-menu-subtitle" style="font-size: 70%;">Enter recipient wallet address (ENS supported)</p>
+					
+					<div id="wallet-input">
+						<input id="address" type="text" name="address" placeholder="Address (0x... or ENS.eth)" required 
 					style="width: 100%;padding: 10px 15px;border-radius: 10px;border: 1px solid rgba(255,255,255,0.3);background: rgba(255,255,255,0.2);color: #FFF;margin: 10px 0 20px;" />
+						<button id="connect-wallet" class="tertiary-bg px-3 py-1 rounded-lg text-sm border border-white/40 shadow">Connect Wallet</button>
+					</div>
+					
 					<button id="newGameBtn" type="submit" class="gm-btn btn-blue">Play to Get Funds</button>
 
 					<button id="aboutBtn" class="small-btn" type="button" name="button" style="background: transparent; font-size: 70%; margin-top: 10px;">Game Credits</button>

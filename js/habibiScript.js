@@ -33,6 +33,37 @@ if (typeof web3 !== 'undefined') {
 // Global Variables
 var walletAddress = false;
 var atMaxToday = false;
+var ensName = false;
+
+const connectBtn = document.getElementById('connect-wallet');
+const addressInput = document.getElementById('address');
+
+async function connectWallet() {
+  try {
+    // Prompt user to connect to MetaMask
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+    // Update button text
+    connectBtn.innerText = 'Disconnect';
+
+    // Get the current account
+    const accounts = await web3.eth.getAccounts();
+    const account = accounts[0];
+    console.log('Connected to', account);
+
+    // Set as input
+    addressInput.value = account;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+connectBtn.addEventListener('click', connectWallet);
+
+// Check if MetaMask is installed
+if (typeof window.ethereum === 'undefined') {
+  // Hide connect button
+  connectBtn.style.display = 'none';
+}
 
 // Splash Page
 var pageSplash = document.querySelector('#pageSplash');
@@ -483,7 +514,14 @@ var gameEngine = {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            walletAddress
+            walletAddress,
+            ensName,
+            game: {
+              level: gameEngine.levelNum,
+              time: gameEngine.levelTime,
+              score: gameEngine.score,
+              taps: gameEngine.tapNum,
+            }
         })
     })
     .then(response => response.json())
@@ -494,7 +532,7 @@ var gameEngine = {
         document.getElementById('lvlPssdFaucetMessage').innerHTML = '+0.01 ETH Earned (<a href="https://sepolia.explorer.b3.fun/address/' + walletAddress + '" target="_blank">View Transaction</a>)';
 
         // Fetch the stats from the API
-        fetch('https://faucet-api.b3.fun/count?walletAddress=' + walletAddress)
+        fetch('https://faucet-api.b3.fun/count?walletAddress=' + walletAddress + '&ensName=' + ensName)
         .then(response => response.json())
         .then(data => {
           console.log('Success:', data);
@@ -761,48 +799,111 @@ abtPageBackBtn.addEventListener('click', function() {
 // -- New Game Button
 newGameBtn.addEventListener('click', function() {
   // Get the address from #address input
-  try {
-    walletAddress = Web3.utils.toChecksumAddress(document.getElementById('address').value.trim());
+  var input = document.getElementById('address').value.trim();
 
-    // Show stats
-    console.log(walletAddress);
-    const shortAddress = walletAddress.slice(0, 5) + "..." + walletAddress.slice(-5);
-    document.getElementById('statsAddress').innerHTML = "<a href='https://sepolia.explorer.b3.fun/address/" + walletAddress + "' target='_blank'>" + shortAddress + "</a>";
+  let username = "";
 
-    // Fetch the stats from the API
-    fetch('https://faucet-api.b3.fun/count?walletAddress=' + walletAddress)
+  // If input to lowercase contains .eth, fetch the ENS name
+  if (input.toLowerCase().endsWith('.eth')) {
+    const ensLookupUrl = 'https://corsproxy.io/?' + encodeURIComponent('https://ensdata.net/' + input);
+    // Fetch the ENS name
+    fetch(ensLookupUrl)
     .then(response => response.json())
     .then(data => {
-      console.log('Success:', data);
+      console.log('Success ENS:', data);
+      if(data.address) {
+        walletAddress = data.address;
+      }
+      if(data.ens) {
+        username = data.ens;
+        ensName = data.ens;
+      }
 
-      if(data.count >= 10) {
-        atMaxToday = true;
-        document.getElementById('statsBadge').innerHTML = "Daily Limit Reached: 0.1 ETH";
-      }
-      else {
-        document.getElementById('statsAmount').innerHTML = data.count * 0.01;
-      }
-      document.getElementById('stats').style.display = 'block';
+      // Show stats
+      console.log(username, walletAddress);
+      document.getElementById('statsAddress').innerHTML = "<a href='https://sepolia.explorer.b3.fun/address/" + walletAddress + "' target='_blank'>" + username + "</a>";
+
+      // Fetch the stats from the API
+      fetch('https://faucet-api.b3.fun/count?walletAddress=' + walletAddress + '&ensName=' + ensName)
+      .then(response => response.json())
+      .then(data => {
+        console.log('Got stats:', data);
+
+        if(data.count >= 10) {
+          atMaxToday = true;
+          document.getElementById('statsBadge').innerHTML = "Daily Limit Reached: 0.1 ETH";
+        }
+        else {
+          document.getElementById('statsAmount').innerHTML = data.count * 0.01;
+        }
+        document.getElementById('stats').style.display = 'block';
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
     })
     .catch((error) => {
       console.error('Error:', error);
+
+      Toastify({
+        text: "Invalid ENS name!",
+        duration: 4000,
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        style: {
+          background: "linear-gradient(to right, #c40118, #6b0713)",
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
+
+      return;
     });
-  } catch(e) { 
-    console.error('invalid ethereum address', e.message);
-    console.log('Invalid address');
+  }
+  else {
+    try {
+      walletAddress = Web3.utils.toChecksumAddress(input);
+      username = walletAddress.slice(0, 5) + "..." + walletAddress.slice(-5);
 
-    Toastify({
-      text: "Invalid B3 EVM address!",
-      duration: 4000,
-      gravity: "bottom", // `top` or `bottom`
-      position: "right", // `left`, `center` or `right`
-      style: {
-        background: "linear-gradient(to right, #c40118, #6b0713)",
-      },
-      onClick: function(){} // Callback after click
-    }).showToast();
+      // Show stats
+      console.log(walletAddress);
+      document.getElementById('statsAddress').innerHTML = "<a href='https://sepolia.explorer.b3.fun/address/" + walletAddress + "' target='_blank'>" + username + "</a>";
 
-    return;
+      // Fetch the stats from the API
+      fetch('https://faucet-api.b3.fun/count?walletAddress=' + walletAddress)
+      .then(response => response.json())
+      .then(data => {
+        console.log('Got stats:', data);
+
+        if(data.count >= 10) {
+          atMaxToday = true;
+          document.getElementById('statsBadge').innerHTML = "Daily Limit Reached: 0.1 ETH";
+        }
+        else {
+          document.getElementById('statsAmount').innerHTML = data.count * 0.01;
+        }
+        document.getElementById('stats').style.display = 'block';
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
+    } catch(e) { 
+      console.error('invalid ethereum address', e.message);
+      console.log('Invalid address');
+
+      Toastify({
+        text: "Invalid B3 EVM address or ENS name!",
+        duration: 4000,
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        style: {
+          background: "linear-gradient(to right, #c40118, #6b0713)",
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
+
+      return;
+    }
   }
 
   // is a valid address

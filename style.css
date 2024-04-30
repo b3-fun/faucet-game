@@ -116,6 +116,16 @@ hr {
   margin: 0 5px;
 }
 
+#wallet-input {
+  position: relative;
+}
+
+#connect-wallet {
+  position: absolute;
+  right: 10px;
+  top: 22px;
+}
+
 .txt-bold {
   font-weight: 600;
 }
