@@ -528,6 +528,13 @@ var gameEngine = {
     .then(data => {
         console.log('Success:', data);
 
+        posthog.capture('faucet-issued', {
+          walletAddress,
+          level: gameEngine.levelNum,
+          score: gameEngine.score,
+          taps: gameEngine.tapNum,
+        });
+
         var shortAddress = walletAddress.slice(0, 5) + "..." + walletAddress.slice(-5);
         document.getElementById('lvlPssdFaucetMessage').innerHTML = '+0.01 ETH Earned (<a href="https://sepolia.explorer.b3.fun/address/' + walletAddress + '" target="_blank">View Transaction</a>)';
 
@@ -567,6 +574,11 @@ var gameEngine = {
     })
     .catch((error) => {
         console.error('Error:', error);
+
+        posthog.capture('faucet-error', {
+          walletAddress,
+          error: error.error ?? "Something went wrong!"
+        });
 
         Toastify({
           text: error.error ?? "Something went wrong!",
@@ -829,6 +841,11 @@ newGameBtn.addEventListener('click', function() {
       .then(data => {
         console.log('Got stats:', data);
 
+        posthog.capture('faucet-connected', {
+          walletAddress,
+          ensName,
+        });
+
         if(data.count >= 10) {
           atMaxToday = true;
           document.getElementById('statsBadge').innerHTML = "Daily Limit Reached: 0.1 ETH";
@@ -873,6 +890,10 @@ newGameBtn.addEventListener('click', function() {
       .then(response => response.json())
       .then(data => {
         console.log('Got stats:', data);
+
+        posthog.capture('faucet-connected', {
+          walletAddress,
+        });
 
         if(data.count >= 10) {
           atMaxToday = true;
