@@ -2,6 +2,62 @@ html {
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: 'Neue Montreal Bold';
+  src: url('https://cdn.b3.fun/fonts/ppneuemontreal-bold-webfont.woff2') format('woff2'),
+       url('https://cdn.b3.fun/fonts/ppneuemontreal-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Neue Montreal Regular';
+  src: url('https://cdn.b3.fun/fonts/ppneuemontreal-regular-webfont.woff2') format('woff2'),
+       url('https://cdn.b3.fun/fonts/ppneuemontreal-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Neue Montreal Medium';
+  src: url('https://cdn.b3.fun/fonts/ppneuemontreal-medium-webfont.woff2') format('woff2'),
+       url('https://cdn.b3.fun/fonts/ppneuemontreal-medium-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Neue Montreal Semibold';
+  src: url('https://cdn.b3.fun/fonts/ppneuemontreal-semibold-webfont.woff2') format('woff2'),
+       url('https://cdn.b3.fun/fonts/ppneuemontreal-semibold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Calibre Bold';
+  src: url('https://cdn.b3.fun/fonts/calibre2-bold-webfont.woff2') format('woff2'),
+       url('https://cdn.b3.fun/fonts/calibre2-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Calibre Heavy';
+  src: url('https://cdn.b3.fun/fonts/calibre2-heavy-webfont.woff2') format('woff2'),
+       url('https://cdn.b3.fun/fonts/calibre2-heavy-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Calibre Regular';
+  src: url('https://cdn.b3.fun/fonts/calibre2-regular-webfont.woff2') format('woff2'),
+       url('https://cdn.b3.fun/fonts/calibre2-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 *, *:before, *:after {
   box-sizing: inherit;
 
@@ -23,13 +79,60 @@ html {
 }
 
 body {
-  font-family: 'Satoshi', sans-serif;
-  background: #161616;
+  font-family: 'Neue Montreal Regular', sans-serif;
+  letter-spacing: 0.5px;
+
+  background-color: #f9f9f9;
+  pointer-events: auto;
+  -webkit-text-fill-color: inherit;
+  cursor: url("https://cdn.b3.fun/cursor-48px.png"), auto;  
+  background-image: url("https://cdn.b3.fun/bg-texture.svg");
+  background-position: 50%;
+  background-repeat: repeat;
+  background-size: cover;
+  background-attachment: scroll;
+  background-clip: border-box;
+  overflow: visible;
+  min-height: 100vh;
 }
 
 body, h1,h2,h3, p, menu, button{
 	margin:0;
 	padding:0;
+}
+
+.heading-font {
+  font-family: 'Calibre Bold', sans-serif;
+}
+
+.font-dark {
+  color: #272727;
+}
+
+.nav-button {
+  background-color: #3f75f6;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: .05rem;
+  -webkit-text-stroke-color: #FFF;
+  text-transform: uppercase;
+  font-family: 'Neue Montreal Medium', sans-serif;
+  border-radius: 16px;
+  padding: 12px 20px;
+  cursor: url("https://cdn.b3.fun/cursor-48px.png"), auto;
+  font-size: 16px;
+}
+
+.connector {
+  z-index: -1;
+  background-color: #3368ef;
+  pointer-events: none;
+  width: 100%;
+  height: 12px;
+  font-size: 15em;
+  line-height: 20%;
+  position: absolute;
+  top: 50%;
+  margin-top: -6px;
 }
 
 #faucet-game {
@@ -42,7 +145,7 @@ body, h1,h2,h3, p, menu, button{
 
 .main-wrapper {
   font-size: 62.5%; /* reseting base font-size to 10px */
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.05);
   border-radius: 10px;
   overflow: hidden;
 }
@@ -53,7 +156,7 @@ header {
 }
 
 a {
-  color: #58D1FF;
+  color: #f9f9f9;
   text-decoration: none;
   padding: 10px 0;
   display: inline-block;
@@ -66,7 +169,7 @@ hr {
 }
 
 .accent-bg { 
-  background: #0034A3;
+  background: #3368ef;
 }
 
 .accent-hover-bg {
@@ -74,7 +177,7 @@ hr {
 }
 
 .primary-btn {
-  background: #0034A3;
+  background: #3368ef;
   color: #FFF;
 }
 .primary-btn:hover, .primary-btn:focus {
@@ -86,7 +189,7 @@ hr {
   color: #FFF;
 }
 .secondary-btn:hover, .secondary-btn:focus {
-  background: #242424;
+  background: #272727;
 }
 
 .secondary-bg {
@@ -94,7 +197,7 @@ hr {
 }
 
 .tertiary-bg {
-  background: #242424;
+  background: #272727;
 }
 
 .body-text-color {
@@ -139,7 +242,7 @@ hr {
   width: 100%;
   max-width: 640px;
   height: 640px;
-  box-shadow: 0 0 250px 0 rgba(0,0,0,0.4);
+  box-shadow: 0 0 250px 0 rgba(0,0,0,0.2);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -179,7 +282,7 @@ hr {
   top: 0;
   left: 0;
   z-index: -2;
-  background: rgb(0 40 171 / 50%);
+  background: rgb(51 104 239 / 57%);
 }
 
 /* ::after - Animated Gradient Background */
@@ -213,9 +316,9 @@ hr {
 
 /* Green Background Gradient */
 .grn-grdnt-bg::after {
-  background-image: -webkit-linear-gradient(270deg, rgba(11,29,48,0.00) 0%, rgba(0,255,107,0.35) 100%);
-  background-image: -o-linear-gradient(270deg, rgba(11,29,48,0.00) 0%, rgba(0,255,107,0.35) 100%);
-  background-image: linear-gradient(0deg, rgba(11,29,48,0.00) 0%, rgba(0,255,107,0.35) 100%);
+  background-image: -webkit-linear-gradient(270deg, rgba(11,29,48,0.00) 0%, rgb(91, 142, 229, 0.5) 100%);
+  background-image: -o-linear-gradient(270deg, rgba(11,29,48,0.00) 0%, rgb(91, 142, 229, 0.5) 100%);
+  background-image: linear-gradient(0deg, rgba(11,29,48,0.00) 0%, rgb(91, 142, 229, 0.5) 100%);
 }
 
 
@@ -266,9 +369,9 @@ hr {
   top: 0;
   left: 0;
   z-index: -1;
-  background-image: -webkit-linear-gradient(#0034a3a3 0%, #071c62c2 50%);
-  background-image: -o-linear-gradient(#0034a3a3 0%, #071c62c2 50%);
-  background-image: linear-gradient(#0034a3a3 0%, #071c62c2 50%);
+  background-image: -webkit-linear-gradient(#3368efa3 0%, #071c62c2 50%);
+  background-image: -o-linear-gradient(#3368efa3 0%, #071c62c2 50%);
+  background-image: linear-gradient(#3368efa3 0%, #071c62c2 50%);
 }
 
 .game-stats-cont {
@@ -279,7 +382,7 @@ hr {
 }
 
 .gm-stats-time-progress {
-  background: #58D1FF;
+  background: #f9f9f9;
   width: 100%;
   height: 4%;
   transition: all ease 0.2s;
@@ -315,7 +418,7 @@ hr {
 
 .gm-stats-tap-count {
   display: inline-block;
-  color: #58D1FF;
+  color: #f9f9f9;
 }
 
 .stat-wrapper {
@@ -352,7 +455,7 @@ hr {
   position: absolute;
   border-radius: 50%;
   z-index: 0;
-  cursor: pointer;
+  cursor: url("https://cdn.b3.fun/cursor-48px.png"), auto; 
 }
 .tpbl-circle::before, .tpbl-circle::after {
   content: "";
@@ -380,11 +483,11 @@ hr {
 }
 
 .c-blue {
-  box-shadow: inset 0 0 0 17px #58D1FF;
+  box-shadow: inset 0 0 0 17px #f9f9f9;
   z-index: 3;
 }
 .c-blue::before, .c-blue::after {
-  box-shadow: inset 0 0 0 2px #58D1FF;
+  box-shadow: inset 0 0 0 2px #f9f9f9;
 }
 
 .c-red {
@@ -414,7 +517,7 @@ hr {
 
 .evil-circle, .good-circle {
   transform: scale(0);
-  cursor: pointer;
+  cursor: url("https://cdn.b3.fun/cursor-48px.png"), auto; 
   background: rgba(0,0,0,0.5);
 }
 
@@ -445,11 +548,11 @@ hr {
   margin: 0 auto 1.5em;
   width: 3.5em;
   height: 3.5em;
-  box-shadow: inset 0 0 0 1.4em #58D1FF;
+  box-shadow: inset 0 0 0 1.4em #f9f9f9;
 }
 
 .gm-menu-logo-bg::before, .gm-menu-logo-bg::after {
-  box-shadow: inset 0 0 0 2px #58D1FF;
+  box-shadow: inset 0 0 0 2px #f9f9f9;
 }
 
 .gm-menu-title, .gm-menu-subtitle {
@@ -479,7 +582,7 @@ hr {
   font-weight: 300;
   border: 2px solid white;
   text-transform: uppercase;
-  cursor: pointer;
+  cursor: url("https://cdn.b3.fun/cursor-48px.png"), auto; 
 }
 .gm-btn:active {
   transform: scale(1.1);
@@ -489,11 +592,11 @@ hr {
 }
 
 .btn-blue {
-  border-color: #58D1FF;
+  border-color: #f9f9f9;
   font-weight: 600;
 }
 .btn-blue:active {
-  background: #58D1FF;
+  background: #f9f9f9;
 }
 
 
@@ -689,7 +792,7 @@ hr {
   background: none;
   color: white;
   font-size: 14px;
-  cursor: pointer;
+  cursor: url("https://cdn.b3.fun/cursor-48px.png"), auto; 
 }
 .admin-cp-button:hover {
   background: white;
@@ -704,7 +807,7 @@ hr {
   width: 100%;
   margin: 15px 0 0 0;
   font-size: 18px;
-  cursor: pointer;
+  cursor: url("https://cdn.b3.fun/cursor-48px.png"), auto; 
 }
 
 .toggleCheckbox {
@@ -808,7 +911,7 @@ hr {
   background-color: #FA4760;
   }
   100% {
-    background-color: #58D1FF;
+    background-color: #f9f9f9;
   }
 }
 .switchColors-animation {

@@ -7,15 +7,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 	<meta name="HandheldFriendly" content="true"/>
 	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet">
 	<script src="https://cdn.tailwindcss.com"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
 	<link href="style.css" rel="stylesheet">
 
 	<!-- favicon -->
-	<link rel="apple-touch-icon" href="https://cdn.b3.fun/b3-logo-temp-cropped.png">
-	<link rel="icon" type="image/png" href="https://cdn.b3.fun/b3-logo-temp-cropped.png">
+	<link rel="apple-touch-icon" href="https://cdn.b3.fun/b3_logo%40.png">
+	<link rel="icon" type="image/png" href="https://cdn.b3.fun/b3_logo%40.png">
+	<link rel="icon" type="image/svg" href="https://cdn.b3.fun/b3_logo.svg">
 
 	<!-- OG Details -->
 	<meta property="og:title" content="B3 Sepolia (Testnet) Faucet" />
@@ -23,7 +23,7 @@
 	<meta property="og:site_name" content="B3 Faucet - Get B3 Testnet Funds by playing our Faucet Game" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://faucet.b3.fun" />
-	<meta property="og:image" content="https://cdn.b3.fun/b3-logo-temp.png" />
+	<meta property="og:image" content="https://cdn.b3.fun/b3_logo%40.png" />
 
 	<script>
 		!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -35,7 +35,7 @@
 	<header class="py-5 z-10 relative">
 		<div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
 		  <div class="flex items-center justify-between max-lg:flex-col w-full gap-5">
-			<div class="flex-shrink-0 flex gap-2 items-center max-lg:w-full max-lg:flex-grow">
+			<div class="w-full flex gap-2 items-center flex-grow">
 			  <span class="flex items-center lg:hidden mr-4">
 				<button
 				  class="text-white/50 hidden max-lg:block"
@@ -85,56 +85,61 @@
 				</button>
 			  </span>
   
-			  <div class="flex gap-4 items-center">
-				<img
-				  src="https://cdn.b3.fun/b3-logo-temp-cropped.png"
-				  alt="B3 Logo"
-				  class="w-10 h-10"
-				/>
-				<span class="body-text-color font-light text-xl flex items-center gap-2">
-				  <span class="drop-shadow">Faucet</span>
-				  <span class="tertiary-bg px-3 py-1 rounded-lg text-sm border border-white/5 shadow">
-					Testnet
-				  </span>
-				</span>
+			  <div class="flex gap-4 items-center justify-between w-full">
+				<div class="flex gap-4 items-center">
+					<img
+					src="https://cdn.b3.fun/b3_logo.svg"
+					alt="B3 Logo"
+					class="w-16 h-12"
+					/>
+					<span class="body-text-color font-dark text-xl flex items-center gap-2">
+					<span class="heading-font font-dark max-lg:text-white">Faucet</span>
+					<span class="tertiary-bg px-3 py-1 rounded-md text-sm shadow">
+						Testnet
+					</span>
+					</span>
+				</div>
   
-				<div class="gap-8 items-center hidden lg:flex ml-12">
-					<a
-						href="https://b3.fun/"
-						className="body-text-color font-light drop-shadow-md hover:text-white duration-200"
+				<div class="relative">
+					<div class="gap-2 items-center hidden lg:flex">
+						<a
+							href="https://b3.fun/"
+							class="nav-button hover:text-white duration-200"
+							rel="noopener noreferrer"
+							target="_blank"
+							title=""
+						>
+						About B3
+						</a>
+						<a
+							href="https://docs.b3.fun/"
+							class="nav-button hover:text-white duration-200"
+							rel="noopener noreferrer"
+							target="_blank"
+							title=""
+						>
+						Docs
+						</a>
+						<a
+							href="https://sepolia.explorer.b3.fun/"
+							class="nav-button hover:text-white duration-200"
+							rel="noopener noreferrer"
+							target="_blank"
+							title=""
+						>
+						Explorer
+						</a>
+						<a
+						href="https://bridge.b3.fun/"
+						class="nav-button hover:text-white duration-200"
 						rel="noopener noreferrer"
 						target="_blank"
 						title=""
 					>
-                    About B3
-                 	</a>
-					<a
-						href="https://docs.b3.fun/"
-						className="body-text-color font-light drop-shadow-md hover:text-white duration-200"
-						rel="noopener noreferrer"
-						target="_blank"
-						title=""
-					>
-					Docs
+					Bridge
 					</a>
-					<a
-						href="https://sepolia.explorer.b3.fun/"
-						className="body-text-color font-light drop-shadow-md hover:text-white duration-200"
-						rel="noopener noreferrer"
-						target="_blank"
-						title=""
-					>
-                    Explorer
-                 	</a>
-					 <a
-					 href="https://bridge.b3.fun/"
-					 className="body-text-color font-light drop-shadow-md hover:text-white duration-200"
-					 rel="noopener noreferrer"
-					 target="_blank"
-					 title=""
-				 >
-				 Bridge
-				  </a>
+					</div>
+					<div class="connector"></div>
 				</div>
 			  </div>
 			</div>
@@ -142,7 +147,7 @@
 			
 		  </div>
 		  <nav class="hidden">
-			<div class="p-4 tertiary-bg border border-white/5 mt-4 rounded-lg shadow-xl">
+			<div class="p-4 tertiary-bg border border-black/5 mt-4 rounded-lg shadow-xl">
 			  <div class="grid gap-y-7">
 				<a 
 					className="flex items-center p-2 -m-2 text-base font-medium body-text-color transition-all duration-200 rounded-md hover:bg-black/20 focus:outline-none font-pj focus:ring-1 focus:ring-colorFive focus:ring-offset-2"
@@ -204,7 +209,7 @@
 				<div class="fixed-75w-wrapper">
 					<div class="gm-menu-header-cont">
 						<div class="tpbl-circle c-blue gm-menu-logo-bg"></div>
-						<h1 class="gm-menu-title">B3 Testnet Faucet</h1>
+						<h1 class="gm-menu-title heading-font">B3 Testnet Faucet</h1>
 						<h2 class="gm-menu-subtitle">Play to receive testnet funds</h2>
 					</div>
 
@@ -216,7 +221,7 @@
 						<button id="connect-wallet" class="tertiary-bg px-3 py-1 rounded-lg text-sm border border-white/40 shadow">Connect Wallet</button>
 					</div>
 					
-					<button id="newGameBtn" type="submit" class="gm-btn btn-blue">Play to Get Funds</button>
+					<button id="newGameBtn" type="submit" class="gm-btn btn-blue heading-font">Play to Get Funds</button>
 
 					<button id="aboutBtn" class="small-btn" type="button" name="button" style="background: transparent; font-size: 70%; margin-top: 10px;">Game Credits</button>
 				</div>
