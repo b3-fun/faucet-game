@@ -146,7 +146,7 @@ body, h1,h2,h3, p, menu, button{
 .main-wrapper {
   font-size: 62.5%; /* reseting base font-size to 10px */
   border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 10px;
+  border-radius: 20px;
   overflow: hidden;
 }
 
@@ -223,6 +223,15 @@ hr {
   position: relative;
 }
 
+#wallet-input ::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 1; /* Firefox */
+}
+
+#wallet-input ::-ms-input-placeholder { /* Edge 12 -18 */
+  color: rgba(255, 255, 255, 0.6);
+}
+
 #connect-wallet {
   position: absolute;
   right: 10px;
@@ -238,11 +247,12 @@ hr {
 }
 
 .main-wrapper {
-  background: url('images/backgroundPattern.svg') repeat rgb(11, 29, 49);
+  background: url("https://cdn.b3.fun/b3-bg-texture.jpg") no-repeat;
+  background-size: cover;
   width: 100%;
   max-width: 640px;
   height: 640px;
-  box-shadow: 0 0 250px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 0 100px 0 rgba(0,0,0,0.2);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -534,7 +544,8 @@ hr {
 /*  -------- Game menu page -------- */
 
 .page-game-menu {
-  background: url('images/backgroundPattern.svg') repeat #17203d;
+  background: url("https://cdn.b3.fun/b3-bg-texture.jpg") no-repeat;
+  background-size: cover;
 }
 
 .gm-menu-header-cont {
@@ -602,7 +613,8 @@ hr {
 
 /* Game Tutorial page */
 .page-tutorial {
-  background: url('images/backgroundPattern.svg') repeat rgb(11, 29, 49);
+  background: url("https://cdn.b3.fun/b3-bg-texture.jpg") no-repeat;
+  background-size: cover;
   position: relative;
 }
 

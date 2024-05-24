@@ -40,18 +40,32 @@ const addressInput = document.getElementById('address');
 
 async function connectWallet() {
   try {
+    // If the wallet is already connected (the button is Disconnect)
+    if(connectBtn.innerText === 'Disconnect') {
+      // Clear the input
+      addressInput.value = '';
+      // Update button text
+      connectBtn.innerText = 'Connect';
+      return;
+    }
+
     // Prompt user to connect to MetaMask
     await window.ethereum.request({ method: 'eth_requestAccounts' });
-    // Update button text
-    connectBtn.innerText = 'Disconnect';
 
     // Get the current account
     const accounts = await web3.eth.getAccounts();
-    const account = accounts[0];
-    console.log('Connected to', account);
-
-    // Set as input
-    addressInput.value = account;
+    console.log(accounts);
+  
+    if(accounts.length > 0 && accounts[0]) {
+      const account = accounts[0];
+      console.log('Connected to', account);
+      
+      // Update button text
+      connectBtn.innerText = 'Disconnect';
+      
+      // Set as input
+      addressInput.value = account;
+    }
   } catch (error) {
     console.error(error);
   }
