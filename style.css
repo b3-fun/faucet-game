@@ -212,7 +212,7 @@ hr {
   display: block;
   text-align: center;
   padding: 0 10px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.8);
 }
 
 #statsBadge {
